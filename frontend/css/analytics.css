@@ -1,0 +1,162 @@
+.analytics-header {
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+.analytics-header h1 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.back-link {
+  font-size: 0.88rem;
+  color: var(--color-primary);
+}
+
+.analytics-controls {
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.analytics-controls label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.analytics-controls select {
+  padding: 8px 12px;
+  border: 2px solid var(--color-border);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  color: var(--color-text);
+  background: var(--color-bg);
+  cursor: pointer;
+  min-width: 180px;
+}
+
+.analytics-controls select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.btn-refresh {
+  padding: 8px 20px;
+  background: var(--color-primary);
+  color: #fff;
+  font-size: 0.88rem;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.btn-refresh:hover {
+  background: var(--color-primary-hover);
+}
+
+/* ── Heatmap grid ── */
+.heatmap-container {
+  max-width: 760px;
+  margin: 32px auto;
+  padding: 0 24px;
+}
+
+.heatmap-container h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.heatmap-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.heatmap-section {
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  padding: 24px;
+  text-align: center;
+}
+
+.heatmap-section h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+  margin-bottom: 16px;
+}
+
+.hmap-btn {
+  display: block;
+  width: 100%;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  border: 2px solid var(--color-border);
+  background: #f8fafc;
+  color: var(--color-text);
+  cursor: default;
+  transition: background 0.3s, border-color 0.3s;
+  position: relative;
+}
+
+.hmap-btn .btn-label {
+  display: block;
+}
+
+.hmap-btn .btn-count {
+  font-size: 1.3rem;
+  font-weight: 700;
+  display: block;
+  margin-top: 4px;
+  color: var(--color-text);
+}
+
+/* ── Color legend ── */
+.legend {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 8px 0 24px;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.legend-bar {
+  flex: 1;
+  height: 12px;
+  border-radius: 6px;
+  background: linear-gradient(to right, #dbeafe, #fef08a, #f97316, #dc2626);
+  border: 1px solid var(--color-border);
+}
+
+.empty-state {
+  text-align: center;
+  color: var(--color-text-muted);
+  padding: 48px 0;
+  font-size: 1rem;
+}

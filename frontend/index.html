@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Math Tracker — Login</title>
+  <link rel="stylesheet" href="/css/common.css" />
+  <link rel="stylesheet" href="/css/login.css" />
+</head>
+<body class="login-page">
+  <div class="login-card">
+    <div class="login-logo">🧮</div>
+    <h1>Math Tracker</h1>
+    <p class="subtitle">Enter your User ID to get started</p>
+
+    <div class="form-group">
+      <label for="user-id-input">User ID</label>
+      <input
+        type="text"
+        id="user-id-input"
+        placeholder="e.g. alice, bob123"
+        autocomplete="off"
+        spellcheck="false"
+        maxlength="64"
+      />
+      <p class="error-msg" id="error-msg"></p>
+    </div>
+
+    <button class="btn-go" id="go-btn" disabled>GO</button>
+  </div>
+
+  <script src="/js/auth.js"></script>
+  <script src="/js/login.js"></script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Math Tracker — Heatmap Analytics</title>
+  <link rel="stylesheet" href="/css/common.css" />
+  <link rel="stylesheet" href="/css/analytics.css" />
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="analytics-header">
+    <h1>📊 Click Heatmap Analytics</h1>
+    <div style="display:flex;align-items:center;gap:16px">
+      <a class="back-link" href="/app.html">← Back to App</a>
+      <button class="logout-btn" id="logout-btn" style="background:none;border:1px solid #e2e8f0;border-radius:6px;padding:4px 12px;font-size:0.82rem;color:#64748b;cursor:pointer;">Logout</button>
+    </div>
+  </header>
+
+  <!-- Controls -->
+  <div class="analytics-controls">
+    <label for="user-select">Filter by user:</label>
+    <select id="user-select">
+      <option value="all">All Users</option>
+    </select>
+    <button class="btn-refresh" id="refresh-btn">Refresh</button>
+  </div>
+
+  <!-- Heatmap -->
+  <div class="heatmap-container">
+
+    <div class="legend">
+      <span>Cool (few clicks)</span>
+      <div class="legend-bar"></div>
+      <span>Hot (many clicks)</span>
+    </div>
+
+    <p id="heatmap-error" style="display:none;color:#dc2626;margin-bottom:16px;">
+      Failed to load analytics data. Is the server running?
+    </p>
+
+    <h2>Tab Buttons</h2>
+    <div class="heatmap-grid" style="grid-template-columns: repeat(3,1fr);">
+      <div class="heatmap-section">
+        <h3>Addition Tab</h3>
+        <div class="hmap-btn" id="hmap-tab_addition">
+          <span class="btn-label">tab_addition</span>
+          <span class="btn-count">0</span>
+        </div>
+      </div>
+      <div class="heatmap-section">
+        <h3>Subtraction Tab</h3>
+        <div class="hmap-btn" id="hmap-tab_subtraction">
+          <span class="btn-label">tab_subtraction</span>
+          <span class="btn-count">0</span>
+        </div>
+      </div>
+      <div class="heatmap-section">
+        <h3>Multiplication Tab</h3>
+        <div class="hmap-btn" id="hmap-tab_multiplication">
+          <span class="btn-label">tab_multiplication</span>
+          <span class="btn-count">0</span>
+        </div>
+      </div>
+    </div>
+
+    <h2>Show Result Buttons</h2>
+    <div class="heatmap-grid" style="grid-template-columns: repeat(3,1fr);">
+      <div class="heatmap-section">
+        <h3>Addition</h3>
+        <div class="hmap-btn" id="hmap-show_addition">
+          <span class="btn-label">show_addition</span>
+          <span class="btn-count">0</span>
+        </div>
+      </div>
+      <div class="heatmap-section">
+        <h3>Subtraction</h3>
+        <div class="hmap-btn" id="hmap-show_subtraction">
+          <span class="btn-label">show_subtraction</span>
+          <span class="btn-count">0</span>
+        </div>
+      </div>
+      <div class="heatmap-section">
+        <h3>Multiplication</h3>
+        <div class="hmap-btn" id="hmap-show_multiplication">
+          <span class="btn-label">show_multiplication</span>
+          <span class="btn-count">0</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="/js/auth.js"></script>
+  <script src="/js/heatmap.js"></script>
+</body>
+</html>
