@@ -14,6 +14,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // ── Active tab tracking ───────────────────────────────
+  let activeTab = "addition";
+
+  function getActiveTab() { return activeTab; }
+
   // ── Random number generation ──────────────────────────
   function randInt(min = 1, max = 99) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -22,7 +27,6 @@ document.addEventListener("DOMContentLoaded", () => {
   function generateNumbers(op) {
     let a = randInt();
     let b = randInt();
-    // Ensure subtraction result is non-negative for cleaner UX
     if (op === "subtraction" && b > a) { const tmp = a; a = b; b = tmp; }
     document.getElementById(`num-a-${op}`).textContent = a;
     document.getElementById(`num-b-${op}`).textContent = b;
@@ -35,6 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const tabPanels = document.querySelectorAll(".tab-panel");
 
   function activateTab(op, evt) {
+    activeTab = op;
     tabBtns.forEach(b => b.classList.remove("active"));
     tabPanels.forEach(p => p.classList.remove("active"));
 
@@ -44,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (panel) panel.classList.add("active");
 
     generateNumbers(op);
-    trackClick(`tab_${op}`, "app.html", evt);
+    trackClick(`tab_${op}`, "app.html", evt, op);
   }
 
   tabBtns.forEach(btn => {
@@ -64,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const a = parseInt(document.getElementById(`num-a-${op}`).textContent, 10);
       const b = parseInt(document.getElementById(`num-b-${op}`).textContent, 10);
       let result;
-      if (op === "addition")       result = a + b;
+      if (op === "addition")         result = a + b;
       else if (op === "subtraction") result = a - b;
       else                           result = a * b;
 
@@ -72,12 +77,21 @@ document.addEventListener("DOMContentLoaded", () => {
       resultEl.textContent = result;
       resultEl.classList.add("show");
 
-      trackClick(`show_${op}`, "app.html", e);
+      trackClick(`show_${op}`, "app.html", e, getActiveTab());
     });
   });
 
+  // ── Analytics overlay toggle ──────────────────────────
+  const analyticsBtn = document.getElementById("analytics-toggle-btn");
+  if (analyticsBtn) {
+    analyticsBtn.addEventListener("click", () => {
+      const isActive = toggleOverlay();
+      analyticsBtn.textContent = isActive ? "Hide Analytics" : "Analytics";
+      analyticsBtn.classList.toggle("active", isActive);
+    });
+  }
+
   // ── Activate first tab on load ────────────────────────
   activateTab("addition", null);
-  // Restore active state on tab button manually (trackClick was called with null event but still fine)
   document.querySelector('.tab-btn[data-tab="addition"]').classList.add("active");
 });

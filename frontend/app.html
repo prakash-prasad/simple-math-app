@@ -6,6 +6,7 @@
   <title>Math Tracker</title>
   <link rel="stylesheet" href="/css/common.css" />
   <link rel="stylesheet" href="/css/app.css" />
+  <link rel="stylesheet" href="/css/overlay.css" />
 </head>
 <body>
 
@@ -14,9 +15,25 @@
     <span class="brand">🧮 Math Tracker</span>
     <div class="user-info">
       Logged in as <strong id="user-display"></strong>
+      <button class="analytics-toggle-btn" id="analytics-toggle-btn">Analytics</button>
       <button class="logout-btn" id="logout-btn">Logout</button>
     </div>
   </header>
+
+  <!-- Overlay control bar (hidden until Analytics is toggled on) -->
+  <div class="overlay-controls" id="overlay-controls" style="display:none">
+    <label for="overlay-user-select">Filter:</label>
+    <select id="overlay-user-select">
+      <option value="all">All Users</option>
+    </select>
+    <button class="overlay-refresh-btn" id="overlay-refresh-btn">Refresh</button>
+    <div id="overlay-show-counts" class="overlay-show-counts"></div>
+    <div class="overlay-legend">
+      <span>Few</span>
+      <div class="overlay-legend-bar"></div>
+      <span>Many</span>
+    </div>
+  </div>
 
   <!-- Tab bar -->
   <nav class="tab-bar">
@@ -73,11 +90,11 @@
       </div>
     </section>
 
-    <a class="analytics-link" href="/analytics.html">View Click Heatmap Analytics →</a>
   </main>
 
   <script src="/js/auth.js"></script>
   <script src="/js/tracker.js"></script>
+  <script src="/js/overlay.js"></script>
   <script src="/js/app.js"></script>
 </body>
 </html>

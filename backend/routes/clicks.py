@@ -1,6 +1,9 @@
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, Query
 from typing import Optional
-from backend.models import ClickEvent, ClickRecord, ClickListResponse, HeatmapResponse
+from backend.models import (
+    ClickEvent, ClickRecord, ClickListResponse,
+    HeatmapResponse, HeatmapData,
+)
 from backend import database
 
 router = APIRouter()
@@ -15,6 +18,10 @@ async def record_click(event: ClickEvent):
         x=event.x,
         y=event.y,
         timestamp=event.timestamp,
+        tab_id=event.tab_id,
+        session_id=event.session_id,
+        viewport_width=event.viewport_width,
+        viewport_height=event.viewport_height,
     )
     return {"success": True}
 
@@ -26,8 +33,9 @@ async def list_clicks(
     page: Optional[str] = Query(None),
     limit: int = Query(2000, ge=1, le=10000),
 ):
-    rows = await database.get_clicks(user_id=user_id, button_name=button_name,
-                                      page=page, limit=limit)
+    rows = await database.get_clicks(
+        user_id=user_id, button_name=button_name, page=page, limit=limit
+    )
     records = [ClickRecord(**r) for r in rows]
     return ClickListResponse(success=True, data=records, count=len(records))
 
@@ -42,7 +50,6 @@ async def heatmap(users: Optional[str] = Query(None)):
         user_list = None  # all users
 
     data = await database.get_heatmap(user_ids=user_list)
-    from backend.models import HeatmapData
     return HeatmapResponse(
         success=True,
         data=[HeatmapData(**d) for d in data],

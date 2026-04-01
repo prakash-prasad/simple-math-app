@@ -6,6 +6,7 @@ VALID_BUTTONS = {
     "show_addition", "show_subtraction", "show_multiplication",
 }
 VALID_PAGES = {"app.html", "analytics.html"}
+VALID_TABS = {"addition", "subtraction", "multiplication"}
 
 
 class ClickEvent(BaseModel):
@@ -15,6 +16,10 @@ class ClickEvent(BaseModel):
     x: int
     y: int
     timestamp: str
+    tab_id: Optional[str] = None
+    session_id: Optional[str] = None
+    viewport_width: Optional[int] = None
+    viewport_height: Optional[int] = None
 
     @field_validator("user_id")
     @classmethod
@@ -45,6 +50,20 @@ class ClickEvent(BaseModel):
             raise ValueError("x and y must be non-negative")
         return v
 
+    @field_validator("tab_id")
+    @classmethod
+    def valid_tab_id(cls, v: Optional[str]) -> Optional[str]:
+        if v is not None and v not in VALID_TABS:
+            raise ValueError(f"tab_id must be one of {VALID_TABS} or null")
+        return v
+
+    @field_validator("viewport_width", "viewport_height")
+    @classmethod
+    def positive_viewport(cls, v: Optional[int]) -> Optional[int]:
+        if v is not None and v < 0:
+            raise ValueError("viewport dimensions must be non-negative")
+        return v
+
 
 class ClickRecord(BaseModel):
     id: int
@@ -55,6 +74,10 @@ class ClickRecord(BaseModel):
     y: int
     timestamp: str
     created_at: str
+    tab_id: Optional[str] = None
+    session_id: Optional[str] = None
+    viewport_width: Optional[int] = None
+    viewport_height: Optional[int] = None
 
 
 class ClickListResponse(BaseModel):
